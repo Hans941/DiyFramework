@@ -1,0 +1,19 @@
+{
+    "name": "hans941local/hans941framework",
+    "authors": [
+        {
+            "name": "Yanjie-SHI",
+            "email": "amyshi2016@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        },
+        "files": ["app/helper.php"] 
+    },
+    "require": {
+        "psr/container": "^1.0"
+    }
+}
