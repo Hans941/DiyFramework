@@ -79,12 +79,22 @@ class App implements Psr\Container\ContainerInterface {
 
     protected function register()
     {
-
+        $registers = [
+            'response' => \Core\Response::class,
+            'router' => \Core\RouteCollection::class,
+        ];
+        foreach ($registers as $name => $concrete) {
+            $this->bind($name, $concrete, true);
+        }
     }
 
     protected function boot()
     {
-
+        App::getContainer()->get('router')->group([
+            'namespace' => 'App\\Controller'
+        ], function ($router){
+            require_once FRAME_BASE_PATH . '/routes/web.php'; // 因为是require 所以web.php有$router这个变量
+        });
     }
 
 }

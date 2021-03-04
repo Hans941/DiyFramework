@@ -8,4 +8,8 @@ App::getContainer()->bind(RequestInterface::class, function () {
     return \Core\Request\PhpRequest::create($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER);
 });
 
-echo app(RequestInterface::class)->getMethod(); # GET 
+// echo app(RequestInterface::class)->getMethod(); # GET 
+$content = app('router')->dispatch(
+    app(RequestInterface::class)
+);
+app('response')->setContent($content)->send();
