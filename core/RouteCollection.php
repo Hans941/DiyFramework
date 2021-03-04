@@ -117,7 +117,16 @@ Class RouteCollection
         $route = $this->getCurrRoute();
         if(! $route) // 找不到路由
             return 404;
+        
+        // $routerDispatch = $route['action']['uses'];
+        // return $routerDispatch();
+
+        $middleware = $route['action']['middleware'] ?? [];
         $routerDispatch = $route['action']['uses'];
-        return $routerDispatch();
+        return app('pipeline')->create()->setClass(
+            $middleware
+        )->run($routerDispatch)($request);
+
+
     }
 }

@@ -82,6 +82,7 @@ class App implements Psr\Container\ContainerInterface {
         $registers = [
             'response' => \Core\Response::class,
             'router' => \Core\RouteCollection::class,
+            'pipeline' => \Core\PipeLine::class,
         ];
         foreach ($registers as $name => $concrete) {
             $this->bind($name, $concrete, true);
@@ -91,7 +92,10 @@ class App implements Psr\Container\ContainerInterface {
     protected function boot()
     {
         App::getContainer()->get('router')->group([
-            'namespace' => 'App\\Controller'
+            'namespace' => 'App\\Controller',
+            'middleware' => [
+                \App\middleware\WebMiddleWare::class,
+            ],
         ], function ($router){
             require_once FRAME_BASE_PATH . '/routes/web.php'; // 因为是require 所以web.php有$router这个变量
         });
