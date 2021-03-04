@@ -2,8 +2,10 @@
 require __DIR__.'/../vendor/autoload.php';
 require_once  __DIR__.'/../app.php';
 
-App::getContainer()->bind('str',function (){
-    return 'hello str';
+use Core\Request\RequestInterface;
+
+App::getContainer()->bind(RequestInterface::class, function () {
+    return \Core\Request\PhpRequest::create($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER);
 });
 
-echo App::getContainer()->get('str');
+echo app(RequestInterface::class)->getMethod(); # GET 
