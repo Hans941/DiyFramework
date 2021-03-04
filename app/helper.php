@@ -19,6 +19,13 @@ if (! function_exists('response')) {
     }
 }
 
+if (! function_exists('config')) {
+    function config($path)
+    {
+        return App::getContainer()->get('config')->get($path);
+    }
+}
+
 function app($name = null)
 {
     if($name) // 如果选择了具体实例

@@ -83,6 +83,7 @@ class App implements Psr\Container\ContainerInterface {
             'response' => \Core\Response::class,
             'router' => \Core\RouteCollection::class,
             'pipeline' => \Core\PipeLine::class,
+            'config' => \Core\Config::class,
         ];
         foreach ($registers as $name => $concrete) {
             $this->bind($name, $concrete, true);
@@ -91,7 +92,8 @@ class App implements Psr\Container\ContainerInterface {
 
     protected function boot()
     {
-        App::getContainer()->get('router')->group([
+        app('config')->init();
+        app('router')->group([
             'namespace' => 'App\\Controller',
             'middleware' => [
                 \App\middleware\WebMiddleWare::class,
