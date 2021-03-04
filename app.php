@@ -84,6 +84,7 @@ class App implements Psr\Container\ContainerInterface {
             'router' => \Core\RouteCollection::class,
             'pipeline' => \Core\PipeLine::class,
             'config' => \Core\Config::class,
+            'db'    => \Core\Database::class,
         ];
         foreach ($registers as $name => $concrete) {
             $this->bind($name, $concrete, true);

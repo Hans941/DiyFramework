@@ -1,5 +1,5 @@
 <?php
-namespace core;
+namespace Core;
 
 
 use Core\Request\RequestInterface;
