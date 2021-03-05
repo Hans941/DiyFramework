@@ -7,3 +7,5 @@ $router->get('/hello', function () {
 $router->get('/config', function () {
     return config('database');
 });
+
+$router->get('/user', 'UserController@index');
